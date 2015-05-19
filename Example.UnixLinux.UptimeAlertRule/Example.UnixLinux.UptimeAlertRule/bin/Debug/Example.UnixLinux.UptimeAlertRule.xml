@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ManagementPack SchemaVersion="2.0" ContentReadable="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manifest>
+    <Identity>
+      <ID>Example.UnixLinux.UptimeAlertRule</ID>
+      <Version>1.0.0.11</Version>
+    </Identity>
+    <Name>Example UNIX/Linux System Uptime Alert</Name>
+    <References>
+      <Reference Alias="WSMan">
+        <ID>Microsoft.SystemCenter.WSManagement.Library</ID>
+        <Version>7.1.10226.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Unix">
+        <ID>Microsoft.Unix.Library</ID>
+        <Version>7.5.1005.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8433.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemPerf">
+        <ID>System.Performance.Library</ID>
+        <Version>7.0.8433.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <ModuleTypes>
+      <DataSourceModuleType ID="Example.Unix.WSMan.PerfCounterProvider.Delta" Accessibility="Public" Batching="false">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="TargetSystem" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Uri" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Filter" type="xsd:string" minOccurs="0" maxOccurs="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SplitItems" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Interval" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" minOccurs="0" maxOccurs="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="ObjectName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="CounterName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="InstanceName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Value" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="NumSamples" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Threshold" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Operator" type="CriteriaCompareType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="0" name="PreMapperFilter" type="ExpressionType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="Interval" Selector="$Config/Interval$" ParameterType="int" />
+          <OverrideableParameter ID="NumSamples" Selector="$Config/NumSamples$" ParameterType="int" />
+          <OverrideableParameter ID="Threshold" Selector="$Config/Threshold$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Enum" TypeID="Unix!Microsoft.Unix.WSMan.PerfCounterProvider">
+                <TargetSystem>$Config/TargetSystem$</TargetSystem>
+                <Uri>$Config/Uri$</Uri>
+                <Filter>$Config/Filter$</Filter>
+                <SplitItems>$Config/SplitItems$</SplitItems>
+                <Interval>$Config/Interval$</Interval>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+                <ObjectName>$Config/ObjectName$</ObjectName>
+                <CounterName>$Config/CounterName$</CounterName>
+                <InstanceName>$Config/InstanceName$</InstanceName>
+                <Value>$Config/Value$</Value>
+                <PreMapperFilter>$Config/PreMapperFilter$</PreMapperFilter>
+              </DataSource>
+              <ConditionDetection ID="Delta" TypeID="SystemPerf!System.Performance.DeltaThresholdCondition">
+                <NumSamples>$Config/NumSamples$</NumSamples>
+                <Threshold>$Config/Threshold$</Threshold>
+                <Operator>$Config/Operator$</Operator>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="Delta">
+                <Node ID="Enum" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>SystemPerf!System.Performance.Data</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Rules>
+      <Rule ID="Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule" Target="Unix!Microsoft.Unix.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>Alert</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="Example.Unix.WSMan.PerfCounterProvider.Delta" RunAs="WSMan!Microsoft.SystemCenter.WSManagement.WSManActionAccount">
+            <TargetSystem>$Target/Property[Type="Unix!Microsoft.Unix.Computer"]/NetworkName$</TargetSystem>
+            <Uri>http://schemas.microsoft.com/wbem/wscim/1/cim-schema/2/SCX_OperatingSystem?__cimnamespace=root/scx</Uri>
+            <Filter />
+            <SplitItems>true</SplitItems>
+            <Interval>30</Interval>
+            <ObjectName>System</ObjectName>
+            <CounterName>Uptime</CounterName>
+            <InstanceName></InstanceName>
+            <Value>$Data/WsManData/*[local-name(.)='SCX_OperatingSystem']/*[local-name(.)='SystemUpTime']$</Value>
+            <NumSamples>1</NumSamples>
+            <Threshold>1</Threshold>
+            <Operator>Less</Operator>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="Alert" TypeID="Health!System.Health.GenerateAlert">
+            <Priority>1</Priority>
+            <Severity>2</Severity>
+            <AlertMessageId>$MPElement[Name="Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage"]$</AlertMessageId>
+            <AlertParameters>
+              <AlertParameter1>$Data/FirstValue$</AlertParameter1>
+              <AlertParameter2>$Data/LastValue$</AlertParameter2>
+            </AlertParameters>
+          </WriteAction>
+        </WriteActions>
+      </Rule>
+    </Rules>
+  </Monitoring>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule">
+          <Name>Example Unix/Linux System Uptime Alert Rule</Name>
+          <Description>Description for the new alert rule.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage">
+          <Name>Server restarted</Name>
+          <Description>Server uptime was {0} seconds and is now {1} seconds.</Description>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>

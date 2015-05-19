@@ -1,0 +1,35 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instancedc1d6d1689744195bf3c3eaa5b8ccf2b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.AlertRule" Version="1.0.0.0">
+      <AlertRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Example.UnixLinux.UptimeAlertRule.Rule</Id>
+        <DisplayName>Example Unix/Linux System Uptime Alert Rule</DisplayName>
+        <Description>Description for the new alert rule.</Description>
+        <Category>Alert</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>Unix!Microsoft.Unix.Computer</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <DataSources>
+          <RuleDataSourceItem>
+            <DataSourceId>DS</DataSourceId>
+            <DataSourceConfig>&lt;TargetSystem&gt;$Target/Property[Type="Unix!Microsoft.Unix.Computer"]/NetworkName$&lt;/TargetSystem&gt;&lt;Uri&gt;http://schemas.microsoft.com/wbem/wscim/1/cim-schema/2/SCX_OperatingSystem?__cimnamespace=root/scx&lt;/Uri&gt;&lt;Filter /&gt;&lt;SplitItems&gt;true&lt;/SplitItems&gt;&lt;Interval&gt;300&lt;/Interval&gt;&lt;ObjectName&gt;System&lt;/ObjectName&gt;&lt;CounterName&gt;Uptime&lt;/CounterName&gt;&lt;InstanceName&gt;&lt;/InstanceName&gt;&lt;Value&gt;$Data/WsManData/*[local-name(.)='SCX_OperatingSystem']/*[local-name(.)='SystemUpTime']$&lt;/Value&gt;&lt;NumSamples&gt;1&lt;/NumSamples&gt;</DataSourceConfig>
+            <DataSourceRunAs>WSMan!Microsoft.SystemCenter.WSManagement.WSManActionAccount</DataSourceRunAs>
+            <DataSourceType>Example.Unix.WSMan.PerfCounterProvider.Delta</DataSourceType>
+          </RuleDataSourceItem>
+        </DataSources>
+        <ConditionDetectionConfig>&lt;Expression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;Value&gt;True&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value&gt;True&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/Expression&gt;</ConditionDetectionConfig>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <ConditionDetectionType>System!System.ExpressionFilter</ConditionDetectionType>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>Error</AlertSeverity>
+        <AlertName>Server restarted</AlertName>
+        <AlertDescription>Server was restarted.
+
+$Data/WsManData$</AlertDescription>
+      </AlertRuleConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>
