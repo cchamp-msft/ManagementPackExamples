@@ -1,0 +1,3073 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Azure.WebApp" Accessibility="Public" Abstract="false" Base="Windows!Microsoft.Windows.ApplicationComponent" Hosted="true" Singleton="false" Extension="false">
+          <Property ID="Enabled" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="State" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="UsageState" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="HostNames" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="EnabledHostNames" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="AdminEnabled" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Sku" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="RepositorySiteName" Type="string" AutoIncrement="false" Key="true" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="RepositoryUri" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="WebSpace" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="URL" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="NumberOfWorkers" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="WebSocketsEnabled" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Use32BitWorkerProcess" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="DefaultDocuments" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="NetFrameworkVersion" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="PhpVersion" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="RequestTracingEnabled" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="HttpLoggingEnabled" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="DetailedErrorLoggingEnabled" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="Azure.WebApps.Enabled.Group" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="Azure.WebApps.Group" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+      </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="Microsoft.SystemCenter.WindowsAzure.Subscription.Hosts.AzureWebApp" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="Azure.WebApp" />
+        </RelationshipType>
+      </RelationshipTypes>
+    </EntityTypes>
+    <ModuleTypes>
+      <DataSourceModuleType ID="Azure.WebApp.PowerShellDiscovery.DS" Accessibility="Public" Batching="false" RunAs="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Proxy">
+        <Configuration>
+          <xsd:element minOccurs="1" name="SourceId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ManagedEntityId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="TimeoutSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="PathToAzurePSModule" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Debug" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="PathToAzurePSModule" Selector="$Config/PathToAzurePSModule$" ParameterType="string" />
+          <OverrideableParameter ID="Debug" Selector="$Config/Debug$" ParameterType="bool" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="System!System.CommandExecuterDiscoveryDataSource">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <ApplicationName>%windir%\system32\WindowsPowerShell\v1.0\powershell.exe</ApplicationName>
+                <WorkingDirectory />
+                <CommandLine>-NoLogo -NoProfile -Noninteractive ". '$File/DiscoverAzureWebApps.ps1$'"</CommandLine>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+                <RequireOutput>true</RequireOutput>
+                <Files>
+                  <File>
+                    <Name>DiscoverAzureWebApps.ps1</Name>
+                    <Contents>
+param(
+	[string]$SourceId = "$Config/SourceId$"
+	,[string]$ManagedEntityId="$Config/ManagedEntityId$"
+	,[string]$debug="$Config/Debug$"
+)
+
+# normalize debug to bool
+if ($debug -eq "1" -or $debug.ToLower() -eq "true") {
+	$debug = $true
+} else {
+	$debug = $false
+}
+
+# configure proxy
+$webproxy = "$Target/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/ProxyServerAddress$"
+
+If ($webproxy -ne "") {
+	if ($webproxy -notmatch "^http://") { $webproxy = "http://" + $webproxy }
+	if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 701, 0, "Using proxy: $webproxy") }
+	$error.Clear()
+	$proxy = new-object System.Net.WebProxy
+	$proxy.Address = $webproxy
+	#$account = new-object System.Net.NetworkCredential($user,[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($pwd)), "")
+	#$proxy.credentials = $account
+	$proxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials
+	[System.Net.WebRequest]::DefaultWebProxy = $proxy
+	if ($error.Count -gt 0) {
+		if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 703, 0, "Error configuring proxy: $error") }
+	}
+}
+
+# api and discovery bag staging
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$DiscoveryData = $api.CreateDiscoveryData(0, $SourceId, $ManagedEntityId)
+
+# import module for Azure (hardcoded for now)
+$error.Clear()
+import-module '$Config/PathToAzurePSModule$'
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 704, 0, "Error importing Azure PowerShell module: $error") }
+	exit 1
+}
+
+# define certificate blob from run as profile
+$CertBlob='$RunAs[Name="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Blob"]/Data$'
+$CertPassword='$RunAs[Name="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Password"]/Password$'
+$AzureSubId='$Target/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/SubscriptionId$'
+$AzureSubName='$Target/Property[Type="System!System.Entity"]/DisplayName$'
+
+# decode certificate blob from run as profile
+$tempBytes=[System.Convert]::FromBase64String($CertBlob)
+$tempString=[System.Text.Encoding]::Unicode.GetString($tempBytes)
+$tempBytes=[System.Convert]::FromBase64String($tempString)
+$AzureCert=New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+$AzureCert.Import($tempBytes,$CertPassword,[System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::MachineKeySet)
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 704, 0, "Error reading Azure certificate: $error") }
+	exit 1
+}
+
+# add Azure subscription, name it after the ID to keep it simple and unique
+$error.Clear()
+Set-AzureSubscription -SubscriptionId $AzureSubId -Certificate $AzureCert -SubscriptionName $AzureSubId
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 704, 0, "Error setting Azure subscription: $error") }
+	exit 1
+}
+
+# select Azure subscripton  as current
+Select-AzureSubscription -Current $AzureSubId
+
+$error.Clear()
+# loop through web apps and create a discovered instance for each
+foreach ($WebApp in Get-AzureWebsite) {
+    $Instance = $DiscoveryData.CreateClassInstance("$MPElement[Name='Azure.WebApp']$")
+    $Instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $WebApp.Name)
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/Enabled$", $WebApp.Enabled)
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/State$", $WebApp.State.ToString())
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/UsageState$", $WebApp.UsageState.ToString())
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/HostNames$", $WebApp.HostNames -join ';')
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/EnabledHostNames$", $WebApp.EnabledHostNames -join ';')
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/AdminEnabled$", $WebApp.AdminEnabled)
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/Sku$", $WebApp.Sku.ToString())
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/RepositorySiteName$", $WebApp.RepositorySiteName)
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/RepositoryUri$", $(($WebApp.SiteProperties.Properties | ? {$_.Name -eq "RepositoryUri"}).Value))
+    $Instance.AddProperty("$MPElement[Name='Azure.WebApp']/WebSpace$", $WebApp.WebSpace)
+	$Instance.AddProperty("$MPElement[Name='WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription']/SubscriptionId$", $AzureSubId)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/NumberOfWorkers$", $WebApp.NumberOfWorkers)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/WebSocketsEnabled$", $WebApp.WebSocketsEnabled)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/Use32BitWorkerProcess$", $WebApp.Use32BitWorkerProcess)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/DefaultDocuments$", $WebApp.DefaultDocuments -join ';')
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/NetFrameworkVersion$", $WebApp.NetFrameworkVersion)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/PhpVersion$", $WebApp.PhpVersion)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/RequestTracingEnabled$", $WebApp.RequestTracingEnabled)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/HttpLoggingEnabled$", $WebApp.HttpLoggingEnabled)
+	$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/DetailedErrorLoggingEnabled$", $WebApp.DetailedErrorLoggingEnabled)
+	if ($WebApp.HostNames.Count -gt 1) {
+		$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/URL$", "http://$($WebApp.HostNames[0])")
+	} else {
+		$Instance.AddProperty("$MPElement[Name='Azure.WebApp']/URL$", "http://$($WebApp.HostNames)")
+	}
+    $DiscoveryData.AddInstance($Instance)
+	if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 700, 0, "Added Azure WebApp Instance: $($WebApp.Name)") }
+}
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("DiscoverAzureWebApps.ps1", 704, 0, "Error reading Azure Web Apps: $error") }
+	exit 1
+}
+$api.Return($DiscoveryData)
+</Contents>
+                  </File>
+                </Files>
+              </DataSource>
+            </MemberModules>
+            <Composition>
+              <Node ID="DS" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.Discovery.Data</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Azure.WebApp.TimedPowerShellPropertyBag.Selector" Accessibility="Public" Batching="false">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="TimeoutSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="WebAppName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="PathToAzurePSModule" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Debug" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="PathToAzurePSModule" Selector="$Config/PathToAzurePSModule$" ParameterType="string" />
+          <OverrideableParameter ID="Debug" Selector="$Config/Debug$" ParameterType="bool" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="Azure.WebApp.TimedPowerShellPropertyBag.DS">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+                <PathToAzurePSModule>$Config/PathToAzurePSModule$</PathToAzurePSModule>
+                <Debug>$Config/Debug$</Debug>
+              </DataSource>
+              <ConditionDetection ID="CD" TypeID="System!System.ExpressionFilter">
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">Property[@Name='WebAppName']</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">$Config/WebAppName$</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="CD">
+                <Node ID="DS" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Azure.WebApp.TimedPowerShellPropertyBag.DS" Accessibility="Public" Batching="false" RunAs="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Proxy">
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="TimeoutSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="PathToAzurePSModule" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Debug" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="PathToAzurePSModule" Selector="$Config/PathToAzurePSModule$" ParameterType="string" />
+          <OverrideableParameter ID="Debug" Selector="$Config/Debug$" ParameterType="bool" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                    <SyncTime />
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="PA" TypeID="System!System.CommandExecuterProbePropertyBagBase">
+                <ApplicationName>%windir%\system32\WindowsPowerShell\v1.0\powershell.exe</ApplicationName>
+                <WorkingDirectory />
+                <CommandLine>-NoLogo -NoProfile -Noninteractive ". '$File/AzureWebAppMonitor.ps1$'"</CommandLine>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+                <RequireOutput>true</RequireOutput>
+                <Files>
+                  <File>
+                    <Name>AzureWebAppMonitor.ps1</Name>
+                    <Contents>
+param(
+	[string]$debug="$Config/Debug$"
+)
+
+# api and discovery bag staging
+$api = New-Object -ComObject "MOM.ScriptAPI"
+
+# normalize debug to bool
+if ($debug -eq "1" -or $debug.ToLower() -eq "true") {
+	$debug = $true
+} else {
+	$debug = $false
+}
+
+# configure proxy
+$webproxy = "$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/ProxyServerAddress$"
+
+If ($webproxy -ne "") {
+	if ($webproxy -notmatch "^http://") { $webproxy = "http://" + $webproxy }
+	if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 701, 0, "Using proxy: $webproxy") }
+	$error.Clear()
+	$proxy = new-object System.Net.WebProxy
+	$proxy.Address = $webproxy
+	#$account = new-object System.Net.NetworkCredential($user,[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($pwd)), "")
+	#$proxy.credentials = $account
+	$proxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials
+	[System.Net.WebRequest]::DefaultWebProxy = $proxy
+	if ($error.Count -gt 0) {
+		if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 703, 0, "Error configuring proxy: $error") }
+	}
+}
+
+# import module for Azure
+$error.Clear()
+import-module '$Config/PathToAzurePSModule$'
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 704, 0, "Error importing Azure PowerShell module: $error") }
+	exit 1
+}
+
+# define certificate blob from run as profile
+$CertBlob='$RunAs[Name="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Blob"]/Data$'
+$CertPassword='$RunAs[Name="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Password"]/Password$'
+$AzureSubId='$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/SubscriptionId$'
+$AzureSubName='$Target/Host/Property[Type="System!System.Entity"]/DisplayName$'
+
+# decode certificate blob from run as profile
+$tempBytes=[System.Convert]::FromBase64String($CertBlob)
+$tempString=[System.Text.Encoding]::Unicode.GetString($tempBytes)
+$tempBytes=[System.Convert]::FromBase64String($tempString)
+$AzureCert=New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+$AzureCert.Import($tempBytes,$CertPassword,[System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::MachineKeySet)
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 704, 0, "Error reading Azure certificate: $error") }
+	exit 1
+}
+
+# add Azure subscription, name it after the ID to keep it simple and unique
+$error.Clear()
+Set-AzureSubscription -SubscriptionId $AzureSubId -Certificate $AzureCert -SubscriptionName $AzureSubId
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 704, 0, "Error setting Azure subscription: $error") }
+	exit 1
+}
+
+# select Azure subscripton  as current
+Select-AzureSubscription -Current $AzureSubId
+
+# loop through web apps and create a bag w/status for each
+$error.Clear()
+foreach ($WebApp in Get-AzureWebsite) {
+	$bag = $api.CreatePropertyBag()
+	$bag.AddValue("WebAppName",$WebApp.Name)
+	$bag.AddValue("State",$WebApp.State.ToString())
+	$bag.AddValue("UsageState",$WebApp.UsageState.ToString())
+	$bag.AddValue("Enabled",$WebApp.Enabled)
+	$api.Return($bag)
+	if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 700, 0, "Returning Azure Web App: $($WebApp.Name) State: $($WebApp.State.ToString()) Enabled: $($WebApp.Enabled)") }
+}
+if ($error.Count -gt 0) {
+	if ($debug) { $api.LogScriptEvent("AzureWebAppMonitor.ps1", 704, 0, "Error reading Azure Web Apps: $error") }
+	exit 1
+}
+
+</Contents>
+                  </File>
+                </Files>
+                <OutputType>System.PropertyBagData</OutputType>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="PA">
+                <Node ID="DS" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Azure.WebApp.URLWatcher.DS" Accessibility="Public" Batching="false" RunAs="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Proxy">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="HTTPStatusCode" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ResponseTimeInSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Phrase" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="HTTPStatusCode" Selector="$Config/HTTPStatusCode$" ParameterType="int" />
+          <OverrideableParameter ID="ResponseTimeInSeconds" Selector="$Config/ResponseTimeInSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Phrase" Selector="$Config/Phrase$" ParameterType="string" />
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.UrlProbe">
+                <Proxy>$Config/Proxy$</Proxy>
+                <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+                <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+                <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+                <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+                <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+                <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+                <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+                <RetryCount>$Config/RetryCount$</RetryCount>
+                <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+                <Requests>
+                  <Request>
+                    <RequestID>1</RequestID>
+                    <URL>$Config/URLPath$</URL>
+                    <Verb>GET</Verb>
+                    <Version>HTTP/1.1</Version>
+                    <HttpHeaders>
+                      <HttpHeader>
+                        <Name>User-Agent</Name>
+                        <Value>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)</Value>
+                      </HttpHeader>
+                    </HttpHeaders>
+                    <Body />
+                    <CheckContentChange>false</CheckContentChange>
+                    <ContentHash>00000000-0000-0000-0000-000000000000</ContentHash>
+                    <Depth>0</Depth>
+                    <ThinkTime>0</ThinkTime>
+                    <CheckInternalLinks>false</CheckInternalLinks>
+                    <CheckExternalLinks>false</CheckExternalLinks>
+                    <CheckResources>false</CheckResources>
+                    <RequestEvaluationCriteria>
+                      <StopProcessingIfWarningCriteriaIsMet>false</StopProcessingIfWarningCriteriaIsMet>
+                      <StopProcessingIfErrorCriteriaIsMet>false</StopProcessingIfErrorCriteriaIsMet>
+                      <BasePageEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria>
+                          <NumericCriteriaExpressions>
+                            <NumericCriteriaExpression>
+                              <NumericRequestMetric>BasePageData/TotalResponseTime</NumericRequestMetric>
+                              <Operator>Greater</Operator>
+                              <Value>$Config/ResponseTimeInSeconds$</Value>
+                            </NumericCriteriaExpression>
+                            <NumericCriteriaExpression>
+                              <NumericRequestMetric>BasePageData/StatusCode</NumericRequestMetric>
+                              <Operator>Greater</Operator>
+                              <Value>$Config/HTTPStatusCode$</Value>
+                            </NumericCriteriaExpression>
+                          </NumericCriteriaExpressions>
+                          <ContentMatchCriteria>
+                            <RegExOperator>DoesNotContainSubstring</RegExOperator>
+                            <Value>$Config/Phrase$</Value>
+                          </ContentMatchCriteria>
+                        </ErrorCriteria>
+                      </BasePageEvaluationCriteria>
+                      <LinksEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </LinksEvaluationCriteria>
+                      <ResourcesEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </ResourcesEvaluationCriteria>
+                      <WebPageTotalEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </WebPageTotalEvaluationCriteria>
+                      <DepthEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </DepthEvaluationCriteria>
+                    </RequestEvaluationCriteria>
+                    <FormsAuthCredentials />
+                  </Request>
+                </Requests>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebApplicationData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Example.WepAppWatcher.Library.URLProbe" Accessibility="Public" Batching="false" RunAs="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Proxy">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.UrlProbe">
+                <Proxy>$Config/Proxy$</Proxy>
+                <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+                <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+                <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+                <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+                <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+                <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+                <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+                <RetryCount>$Config/RetryCount$</RetryCount>
+                <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+                <Requests>
+                  <Request>
+                    <RequestID>1</RequestID>
+                    <URL>$Config/URLPath$</URL>
+                    <Verb>GET</Verb>
+                    <Version>HTTP/1.1</Version>
+                    <HttpHeaders>
+                      <HttpHeader>
+                        <Name>User-Agent</Name>
+                        <Value>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)</Value>
+                      </HttpHeader>
+                    </HttpHeaders>
+                    <Body />
+                    <CheckContentChange>false</CheckContentChange>
+                    <ContentHash>00000000-0000-0000-0000-000000000000</ContentHash>
+                    <Depth>0</Depth>
+                    <ThinkTime>0</ThinkTime>
+                    <CheckInternalLinks>false</CheckInternalLinks>
+                    <CheckExternalLinks>false</CheckExternalLinks>
+                    <CheckResources>true</CheckResources>
+                    <RequestEvaluationCriteria>
+                      <StopProcessingIfWarningCriteriaIsMet>false</StopProcessingIfWarningCriteriaIsMet>
+                      <StopProcessingIfErrorCriteriaIsMet>false</StopProcessingIfErrorCriteriaIsMet>
+                      <BasePageEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria>
+                          <NumericCriteriaExpressions>
+                            <NumericCriteriaExpression>
+                              <NumericRequestMetric>BasePageData/StatusCode</NumericRequestMetric>
+                              <Operator>GreaterEqual</Operator>
+                              <Value>400</Value>
+                            </NumericCriteriaExpression>
+                          </NumericCriteriaExpressions>
+                        </ErrorCriteria>
+                      </BasePageEvaluationCriteria>
+                      <LinksEvaluationCriteria>
+                        <WarningCriteria>
+                          <StatusCodeCriteria>
+                            <ListNumericRequestMetric>StatusCode</ListNumericRequestMetric>
+                            <Operator>GreaterEqual</Operator>
+                            <Value>400</Value>
+                          </StatusCodeCriteria>
+                        </WarningCriteria>
+                        <ErrorCriteria />
+                      </LinksEvaluationCriteria>
+                      <ResourcesEvaluationCriteria>
+                        <WarningCriteria>
+                          <StatusCodeCriteria>
+                            <ListNumericRequestMetric>StatusCode</ListNumericRequestMetric>
+                            <Operator>GreaterEqual</Operator>
+                            <Value>400</Value>
+                          </StatusCodeCriteria>
+                        </WarningCriteria>
+                        <ErrorCriteria />
+                      </ResourcesEvaluationCriteria>
+                      <WebPageTotalEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </WebPageTotalEvaluationCriteria>
+                      <DepthEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </DepthEvaluationCriteria>
+                    </RequestEvaluationCriteria>
+                    <FormsAuthCredentials />
+                  </Request>
+                </Requests>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebApplicationData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Example.WepAppWatcher.Library.ContentMatch" Accessibility="Public" Batching="false" RunAs="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Proxy">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="Phrase" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="Phrase" Selector="$Config/Phrase$" ParameterType="string" />
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.UrlProbe">
+                <Proxy>$Config/Proxy$</Proxy>
+                <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+                <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+                <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+                <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+                <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+                <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+                <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+                <RetryCount>$Config/RetryCount$</RetryCount>
+                <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+                <Requests>
+                  <Request>
+                    <RequestID>1</RequestID>
+                    <URL>$Config/URLPath$</URL>
+                    <Verb>GET</Verb>
+                    <Version>HTTP/1.1</Version>
+                    <HttpHeaders>
+                      <HttpHeader>
+                        <Name>User-Agent</Name>
+                        <Value>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)</Value>
+                      </HttpHeader>
+                    </HttpHeaders>
+                    <Body />
+                    <CheckContentChange>false</CheckContentChange>
+                    <ContentHash>00000000-0000-0000-0000-000000000000</ContentHash>
+                    <Depth>0</Depth>
+                    <ThinkTime>0</ThinkTime>
+                    <CheckInternalLinks>false</CheckInternalLinks>
+                    <CheckExternalLinks>false</CheckExternalLinks>
+                    <CheckResources>false</CheckResources>
+                    <RequestEvaluationCriteria>
+                      <StopProcessingIfWarningCriteriaIsMet>false</StopProcessingIfWarningCriteriaIsMet>
+                      <StopProcessingIfErrorCriteriaIsMet>false</StopProcessingIfErrorCriteriaIsMet>
+                      <BasePageEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria>
+                          <ContentMatchCriteria>
+                            <RegExOperator>DoesNotContainSubstring</RegExOperator>
+                            <Value>$Config/Phrase$</Value>
+                          </ContentMatchCriteria>
+                        </ErrorCriteria>
+                      </BasePageEvaluationCriteria>
+                      <LinksEvaluationCriteria>
+                        <WarningCriteria>
+                          <StatusCodeCriteria>
+                            <ListNumericRequestMetric>StatusCode</ListNumericRequestMetric>
+                            <Operator>GreaterEqual</Operator>
+                            <Value>400</Value>
+                          </StatusCodeCriteria>
+                        </WarningCriteria>
+                        <ErrorCriteria />
+                      </LinksEvaluationCriteria>
+                      <ResourcesEvaluationCriteria>
+                        <WarningCriteria>
+                          <StatusCodeCriteria>
+                            <ListNumericRequestMetric>StatusCode</ListNumericRequestMetric>
+                            <Operator>GreaterEqual</Operator>
+                            <Value>400</Value>
+                          </StatusCodeCriteria>
+                        </WarningCriteria>
+                        <ErrorCriteria />
+                      </ResourcesEvaluationCriteria>
+                      <WebPageTotalEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </WebPageTotalEvaluationCriteria>
+                      <DepthEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </DepthEvaluationCriteria>
+                    </RequestEvaluationCriteria>
+                    <FormsAuthCredentials />
+                  </Request>
+                </Requests>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebApplicationData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="Example.WepAppWatcher.Library.ResponseTime" Accessibility="Public" Batching="false" RunAs="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.RunAsProfile.Proxy">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="ResponseTimeInSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="ResponseTimeInSeconds" Selector="$Config/ResponseTimeInSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Scheduler" TypeID="System!System.Scheduler">
+                <Scheduler>
+                  <SimpleReccuringSchedule>
+                    <Interval>$Config/IntervalSeconds$</Interval>
+                  </SimpleReccuringSchedule>
+                  <ExcludeDates />
+                </Scheduler>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.UrlProbe">
+                <Proxy>$Config/Proxy$</Proxy>
+                <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+                <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+                <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+                <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+                <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+                <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+                <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+                <RetryCount>$Config/RetryCount$</RetryCount>
+                <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+                <Requests>
+                  <Request>
+                    <RequestID>1</RequestID>
+                    <URL>$Config/URLPath$</URL>
+                    <Verb>GET</Verb>
+                    <Version>HTTP/1.1</Version>
+                    <HttpHeaders>
+                      <HttpHeader>
+                        <Name>User-Agent</Name>
+                        <Value>Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)</Value>
+                      </HttpHeader>
+                    </HttpHeaders>
+                    <Body />
+                    <CheckContentChange>false</CheckContentChange>
+                    <ContentHash>00000000-0000-0000-0000-000000000000</ContentHash>
+                    <Depth>0</Depth>
+                    <ThinkTime>0</ThinkTime>
+                    <CheckInternalLinks>false</CheckInternalLinks>
+                    <CheckExternalLinks>false</CheckExternalLinks>
+                    <CheckResources>false</CheckResources>
+                    <RequestEvaluationCriteria>
+                      <StopProcessingIfWarningCriteriaIsMet>false</StopProcessingIfWarningCriteriaIsMet>
+                      <StopProcessingIfErrorCriteriaIsMet>false</StopProcessingIfErrorCriteriaIsMet>
+                      <BasePageEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria>
+                          <NumericCriteriaExpressions>
+                            <NumericCriteriaExpression>
+                              <NumericRequestMetric>BasePageData/TotalResponseTime</NumericRequestMetric>
+                              <Operator>Greater</Operator>
+                              <Value>$Config/ResponseTimeInSeconds$</Value>
+                            </NumericCriteriaExpression>
+                          </NumericCriteriaExpressions>
+                        </ErrorCriteria>
+                      </BasePageEvaluationCriteria>
+                      <LinksEvaluationCriteria>
+                        <WarningCriteria>
+                          <StatusCodeCriteria>
+                            <ListNumericRequestMetric>StatusCode</ListNumericRequestMetric>
+                            <Operator>GreaterEqual</Operator>
+                            <Value>400</Value>
+                          </StatusCodeCriteria>
+                        </WarningCriteria>
+                        <ErrorCriteria />
+                      </LinksEvaluationCriteria>
+                      <ResourcesEvaluationCriteria>
+                        <WarningCriteria>
+                          <StatusCodeCriteria>
+                            <ListNumericRequestMetric>StatusCode</ListNumericRequestMetric>
+                            <Operator>GreaterEqual</Operator>
+                            <Value>400</Value>
+                          </StatusCodeCriteria>
+                        </WarningCriteria>
+                        <ErrorCriteria />
+                      </ResourcesEvaluationCriteria>
+                      <WebPageTotalEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </WebPageTotalEvaluationCriteria>
+                      <DepthEvaluationCriteria>
+                        <WarningCriteria />
+                        <ErrorCriteria />
+                      </DepthEvaluationCriteria>
+                    </RequestEvaluationCriteria>
+                    <FormsAuthCredentials />
+                  </Request>
+                </Requests>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Scheduler" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebApplicationData</OutputType>
+      </DataSourceModuleType>
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="Azure.WebApp.PowerShell.RunningState.UnitMonitorType" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="NotRunning" NoDetection="false" />
+          <MonitorTypeState ID="Running" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="TimeoutSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="WebAppName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="PathToAzurePSModule" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Debug" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="PathToAzurePSModule" Selector="$Config/PathToAzurePSModule$" ParameterType="string" />
+          <OverrideableParameter ID="Debug" Selector="$Config/Debug$" ParameterType="bool" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="Azure.WebApp.TimedPowerShellPropertyBag.Selector">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
+              <WebAppName>$Config/WebAppName$</WebAppName>
+              <PathToAzurePSModule>$Config/PathToAzurePSModule$</PathToAzurePSModule>
+              <Debug>$Config/Debug$</Debug>
+            </DataSource>
+            <ProbeAction ID="OnDemandReset" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CDError" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>NotEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="String">Running</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CDSuccess" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='State']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">Running</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="NotRunning">
+              <Node ID="CDError">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Running">
+              <Node ID="CDSuccess">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="Running">
+              <Node ID="OnDemandReset" />
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      <UnitMonitorType ID="Example.WepAppWatcher.Library.ErrorCodeFailure" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="ErrorCodeFailure" NoDetection="false" />
+          <MonitorTypeState ID="ErrorCodeOK" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="HTTPStatusCode" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="HTTPStatusCode" Selector="$Config/HTTPStatusCode$" ParameterType="int" />
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS1" TypeID="Example.WepAppWatcher.Library.URLProbe">
+              <URLPath>$Config/URLPath$</URLPath>
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <Proxy>$Config/Proxy$</Proxy>
+              <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+              <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+              <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+              <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+              <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+              <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+              <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+              <RetryCount>$Config/RetryCount$</RetryCount>
+              <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+            </DataSource>
+            <ProbeAction ID="OnDemandReset" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CDErrorCodeFailureTrue" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="UnsignedInteger">RequestResults/RequestResult[@Id=1]/BasePageData/StatusCode</XPathQuery>
+                  </ValueExpression>
+                  <Operator>GreaterEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="UnsignedInteger">$Config/HTTPStatusCode$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CDErrorCodeFailureFalse" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="UnsignedInteger">RequestResults/RequestResult[@Id=1]/BasePageData/StatusCode</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Less</Operator>
+                  <ValueExpression>
+                    <Value Type="UnsignedInteger">$Config/HTTPStatusCode$</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="ErrorCodeOK">
+              <Node ID="CDErrorCodeFailureFalse">
+                <Node ID="DS1" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ErrorCodeFailure">
+              <Node ID="CDErrorCodeFailureTrue">
+                <Node ID="DS1" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="ErrorCodeOK">
+              <Node ID="OnDemandReset" />
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      <UnitMonitorType ID="Example.WepAppWatcher.Library.PhraseMatchFailure" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="ContentMatchCriteriaOK" NoDetection="false" />
+          <MonitorTypeState ID="ContentMatchCriteriaError" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="Phrase" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="Phrase" Selector="$Config/Phrase$" ParameterType="string" />
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS1" TypeID="Example.WepAppWatcher.Library.ContentMatch">
+              <Phrase>$Config/Phrase$</Phrase>
+              <URLPath>$Config/URLPath$</URLPath>
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <Proxy>$Config/Proxy$</Proxy>
+              <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+              <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+              <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+              <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+              <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+              <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+              <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+              <RetryCount>$Config/RetryCount$</RetryCount>
+              <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+            </DataSource>
+            <ProbeAction ID="OnDemandReset" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CDContentMatchCriteriaOK" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.OKCriteriaMatch">
+              <DataItemEvaluationQuery>RequestResults/RequestResult[@Id=1]/BasePageData/ResponseBodyEvalResult</DataItemEvaluationQuery>
+            </ConditionDetection>
+            <ConditionDetection ID="CDContentMatchCriteriaError" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.ErrorCriteriaMatch">
+              <DataItemEvaluationQuery>RequestResults/RequestResult[@Id=1]/BasePageData/ResponseBodyEvalResult</DataItemEvaluationQuery>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="ContentMatchCriteriaOK">
+              <Node ID="CDContentMatchCriteriaOK">
+                <Node ID="DS1" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ContentMatchCriteriaError">
+              <Node ID="CDContentMatchCriteriaError">
+                <Node ID="DS1" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="ContentMatchCriteriaOK">
+              <Node ID="OnDemandReset" />
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      <UnitMonitorType ID="Example.WepAppWatcher.Library.ResponseTimeFailure" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="ResponseTimeFailure" NoDetection="false" />
+          <MonitorTypeState ID="ResponseTimeOK" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.WebModulesSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element minOccurs="1" name="ResponseTimeInSeconds" type="xsd:decimal" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="URLPath" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="Proxy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="ProxyAuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialUserName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="CredentialPassword" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="AuthenticationScheme" type="AuthenticationSchemeType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="FollowRedirects" type="xsd:boolean" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RetryCount" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element minOccurs="1" name="RequestTimeout" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="ResponseTimeInSeconds" Selector="$Config/ResponseTimeInSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="Proxy" Selector="$Config/Proxy$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyUserName" Selector="$Config/ProxyUserName$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyPassword" Selector="$Config/ProxyPassword$" ParameterType="string" />
+          <OverrideableParameter ID="ProxyAuthenticationScheme" Selector="$Config/ProxyAuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialUserName" Selector="$Config/CredentialUserName$" ParameterType="string" />
+          <OverrideableParameter ID="CredentialPassword" Selector="$Config/CredentialPassword$" ParameterType="string" />
+          <OverrideableParameter ID="AuthenticationScheme" Selector="$Config/AuthenticationScheme$" ParameterType="string" />
+          <OverrideableParameter ID="FollowRedirects" Selector="$Config/FollowRedirects$" ParameterType="bool" />
+          <OverrideableParameter ID="RetryCount" Selector="$Config/RetryCount$" ParameterType="int" />
+          <OverrideableParameter ID="RequestTimeout" Selector="$Config/RequestTimeout$" ParameterType="int" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS1" TypeID="Example.WepAppWatcher.Library.ResponseTime">
+              <ResponseTimeInSeconds>$Config/ResponseTimeInSeconds$</ResponseTimeInSeconds>
+              <URLPath>$Config/URLPath$</URLPath>
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <Proxy>$Config/Proxy$</Proxy>
+              <ProxyUserName>$Config/ProxyUserName$</ProxyUserName>
+              <ProxyPassword>$Config/ProxyPassword$</ProxyPassword>
+              <ProxyAuthenticationScheme>$Config/ProxyAuthenticationScheme$</ProxyAuthenticationScheme>
+              <CredentialUserName>$Config/CredentialUserName$</CredentialUserName>
+              <CredentialPassword>$Config/CredentialPassword$</CredentialPassword>
+              <AuthenticationScheme>$Config/AuthenticationScheme$</AuthenticationScheme>
+              <FollowRedirects>$Config/FollowRedirects$</FollowRedirects>
+              <RetryCount>$Config/RetryCount$</RetryCount>
+              <RequestTimeout>$Config/RequestTimeout$</RequestTimeout>
+            </DataSource>
+            <ProbeAction ID="OnDemandReset" TypeID="System!System.PassThroughProbe" />
+            <ConditionDetection ID="CDResponseTimeFailure" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.ErrorCriteriaMatch">
+              <DataItemEvaluationQuery>RequestResults/RequestResult[@Id=1]/BasePageData/TotalResponseTimeEvalResult</DataItemEvaluationQuery>
+            </ConditionDetection>
+            <ConditionDetection ID="CDResponseTimeOK" TypeID="MicrosoftSystemCenterWebApplicationLibrary!Microsoft.SystemCenter.WebApplication.OKCriteriaMatch">
+              <DataItemEvaluationQuery>RequestResults/RequestResult[@Id=1]/BasePageData/TotalResponseTimeEvalResult</DataItemEvaluationQuery>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="ResponseTimeFailure">
+              <Node ID="CDResponseTimeFailure">
+                <Node ID="DS1" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="ResponseTimeOK">
+              <Node ID="CDResponseTimeOK">
+                <Node ID="DS1" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="ResponseTimeOK">
+              <Node ID="OnDemandReset" />
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="Azure.WebApp.PowerShellDiscovery" Enabled="true" Target="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Azure.WebApp" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Azure.WebApp.PowerShellDiscovery.DS">
+          <SourceId>$MPElement$</SourceId>
+          <ManagedEntityId>$Target/Id$</ManagedEntityId>
+          <IntervalSeconds>86400</IntervalSeconds>
+          <TimeoutSeconds>120</TimeoutSeconds>
+          <PathToAzurePSModule>C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure</PathToAzurePSModule>
+          <Debug>false</Debug>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Azure.WebApps.Enabled.Group.DiscoveryRule" Enabled="true" Target="Azure.WebApps.Enabled.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SC!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="Azure.WebApps.Enabled.Group"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Azure.WebApp"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <Property>$MPElement[Name="Azure.WebApp"]/Enabled$</Property>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value>true</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Azure.WebApps.Group.DiscoveryRule" Enabled="true" Target="Azure.WebApps.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SC!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="Azure.WebApps.Group"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Azure.WebApp"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+    <Rules>
+      <Rule ID="Azure.WebApp.TransactionResponseTime" Enabled="false" Target="Azure.WebApp" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>PerformanceCollection</Category>
+        <DataSources>
+          <DataSource ID="DS1" TypeID="Example.WepAppWatcher.Library.URLProbe">
+            <URLPath>$Target/Property[Type="Azure.WebApp"]/URL$</URLPath>
+            <IntervalSeconds>300</IntervalSeconds>
+            <Proxy>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/ProxyServerAddress$</Proxy>
+            <ProxyUserName />
+            <ProxyPassword />
+            <ProxyAuthenticationScheme>None</ProxyAuthenticationScheme>
+            <CredentialUserName />
+            <CredentialPassword />
+            <AuthenticationScheme>None</AuthenticationScheme>
+            <FollowRedirects>true</FollowRedirects>
+            <RetryCount>0</RetryCount>
+            <RequestTimeout>0</RequestTimeout>
+          </DataSource>
+        </DataSources>
+        <ConditionDetection ID="PerfMapper" TypeID="Performance!System.Performance.DataGenericMapper">
+          <ObjectName>Web Application</ObjectName>
+          <CounterName>Total Web Application Response Time</CounterName>
+          <InstanceName />
+          <Value>$Data/TransactionResponseTime$</Value>
+        </ConditionDetection>
+        <WriteActions>
+          <WriteAction ID="PerfWriteAction" TypeID="SC!Microsoft.SystemCenter.CollectPerformanceData" />
+          <WriteAction ID="PerfWriteToDWAction" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData" />
+        </WriteActions>
+      </Rule>
+    </Rules>
+    <Monitors>
+      <UnitMonitor ID="Azure.WebApp.RunningState.Monitor" Accessibility="Internal" Enabled="false" Target="Azure.WebApp" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Azure.WebApp.PowerShell.RunningState.UnitMonitorType" ConfirmDelivery="true">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="Azure.WebApp.RunningState.Monitor_AlertMessageResourceID">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Data/Context/Property[@Name='State']$</AlertParameter2>
+            <AlertParameter3>$Target/Property[Type="Azure.WebApp"]/URL$</AlertParameter3>
+            <AlertParameter4>$Target/Property[Type="Azure.WebApp"]/State$</AlertParameter4>
+            <AlertParameter5>$Target/Property[Type="Azure.WebApp"]/UsageState$</AlertParameter5>
+            <AlertParameter6>$Target/Property[Type="Azure.WebApp"]/Enabled$</AlertParameter6>
+            <AlertParameter7>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/SubscriptionId$</AlertParameter7>
+            <AlertParameter8>$Target/Host/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter8>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="RunningStateSuccess" MonitorTypeStateID="Running" HealthState="Success" />
+          <OperationalState ID="RunningStateError" MonitorTypeStateID="NotRunning" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>900</IntervalSeconds>
+          <TimeoutSeconds>120</TimeoutSeconds>
+          <WebAppName>$Target/Property[Type="System!System.Entity"]/DisplayName$</WebAppName>
+          <PathToAzurePSModule>C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure</PathToAzurePSModule>
+          <Debug>false</Debug>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Azure.WebApp.URLWatcher.ErrorCodeMonitor" Accessibility="Internal" Enabled="false" Target="Azure.WebApp" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Example.WepAppWatcher.Library.ErrorCodeFailure" ConfirmDelivery="true">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="Azure.WebApp.URLWatcher.ErrorCodeMonitor_AlertMessageResourceID">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Data/Context/RequestResults/RequestResult[@Id=1]/BasePageData/StatusCode$</AlertParameter2>
+            <AlertParameter3>$Target/Property[Type="Azure.WebApp"]/URL$</AlertParameter3>
+            <AlertParameter4>$Target/Property[Type="Azure.WebApp"]/State$</AlertParameter4>
+            <AlertParameter5>$Target/Property[Type="Azure.WebApp"]/UsageState$</AlertParameter5>
+            <AlertParameter6>$Target/Property[Type="Azure.WebApp"]/Enabled$</AlertParameter6>
+            <AlertParameter7>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/SubscriptionId$</AlertParameter7>
+            <AlertParameter8>$Target/Host/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter8>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="ErrorCodeMonitorStateSuccess" MonitorTypeStateID="ErrorCodeOK" HealthState="Success" />
+          <OperationalState ID="ErrorCodeMonitorStateError" MonitorTypeStateID="ErrorCodeFailure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <HTTPStatusCode>400</HTTPStatusCode>
+          <URLPath>$Target/Property[Type="Azure.WebApp"]/URL$</URLPath>
+          <IntervalSeconds>300</IntervalSeconds>
+          <Proxy>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/ProxyServerAddress$</Proxy>
+          <ProxyUserName />
+          <ProxyPassword />
+          <ProxyAuthenticationScheme>None</ProxyAuthenticationScheme>
+          <CredentialUserName />
+          <CredentialPassword />
+          <AuthenticationScheme>None</AuthenticationScheme>
+          <FollowRedirects>true</FollowRedirects>
+          <RetryCount>0</RetryCount>
+          <RequestTimeout>0</RequestTimeout>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Azure.WebApp.URLWatcher.ContentMatchMonitor" Accessibility="Public" Enabled="false" Target="Azure.WebApp" ParentMonitorID="Health!System.Health.ConfigurationState" Remotable="true" Priority="Normal" TypeID="Example.WepAppWatcher.Library.PhraseMatchFailure" ConfirmDelivery="true">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="Azure.WebApp.URLWatcher.ContentMatchMonitor_AlertMessageResourceID">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Target/Property[Type="Azure.WebApp"]/URL$</AlertParameter2>
+            <AlertParameter3>$Target/Property[Type="Azure.WebApp"]/State$</AlertParameter3>
+            <AlertParameter4>$Target/Property[Type="Azure.WebApp"]/UsageState$</AlertParameter4>
+            <AlertParameter5>$Target/Property[Type="Azure.WebApp"]/Enabled$</AlertParameter5>
+            <AlertParameter6>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/SubscriptionId$</AlertParameter6>
+            <AlertParameter7>$Target/Host/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter7>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="ContentMatchMonitorStateSuccess" MonitorTypeStateID="ContentMatchCriteriaOK" HealthState="Success" />
+          <OperationalState ID="ContentMatchMonitorStateError" MonitorTypeStateID="ContentMatchCriteriaError" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <Phrase>html</Phrase>
+          <URLPath>$Target/Property[Type="Azure.WebApp"]/URL$</URLPath>
+          <IntervalSeconds>300</IntervalSeconds>
+          <Proxy>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/ProxyServerAddress$</Proxy>
+          <ProxyUserName />
+          <ProxyPassword />
+          <ProxyAuthenticationScheme>None</ProxyAuthenticationScheme>
+          <CredentialUserName />
+          <CredentialPassword />
+          <AuthenticationScheme>None</AuthenticationScheme>
+          <FollowRedirects>true</FollowRedirects>
+          <RetryCount>0</RetryCount>
+          <RequestTimeout>0</RequestTimeout>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Azure.WebApp.URLWatcher.ResponseTimeMonitor" Accessibility="Public" Enabled="false" Target="Azure.WebApp" ParentMonitorID="Health!System.Health.PerformanceState" Remotable="true" Priority="Normal" TypeID="Example.WepAppWatcher.Library.ResponseTimeFailure" ConfirmDelivery="true">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="Azure.WebApp.URLWatcher.ResponseTimeMonitor_AlertMessageResourceID">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Error</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Data/Context/RequestResults/RequestResult[@Id=1]/BasePageData/TotalResponseTime$</AlertParameter2>
+            <AlertParameter3>$Target/Property[Type="Azure.WebApp"]/URL$</AlertParameter3>
+            <AlertParameter4>$Target/Property[Type="Azure.WebApp"]/State$</AlertParameter4>
+            <AlertParameter5>$Target/Property[Type="Azure.WebApp"]/UsageState$</AlertParameter5>
+            <AlertParameter6>$Target/Property[Type="Azure.WebApp"]/Enabled$</AlertParameter6>
+            <AlertParameter7>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/SubscriptionId$</AlertParameter7>
+            <AlertParameter8>$Target/Host/Property[Type="System!System.Entity"]/DisplayName$</AlertParameter8>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="ResponseTimeMonitorStateSuccess" MonitorTypeStateID="ResponseTimeOK" HealthState="Success" />
+          <OperationalState ID="ResponseTimeMonitorStateError" MonitorTypeStateID="ResponseTimeFailure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ResponseTimeInSeconds>5</ResponseTimeInSeconds>
+          <URLPath>$Target/Property[Type="Azure.WebApp"]/URL$</URLPath>
+          <IntervalSeconds>300</IntervalSeconds>
+          <Proxy>$Target/Host/Property[Type="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Subscription"]/ProxyServerAddress$</Proxy>
+          <ProxyUserName />
+          <ProxyPassword />
+          <ProxyAuthenticationScheme>None</ProxyAuthenticationScheme>
+          <CredentialUserName />
+          <CredentialPassword />
+          <AuthenticationScheme>None</AuthenticationScheme>
+          <FollowRedirects>true</FollowRedirects>
+          <RetryCount>0</RetryCount>
+          <RequestTimeout>0</RequestTimeout>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+    <Overrides>
+      <MonitorPropertyOverride ID="OverrideForMonitorAzureWebAppURLWatcherResponseTimeMonitorForContextAzureWebAppsEnabledGroup137e4084081e4edc9d6f99cddd0e4f7b" Context="Azure.WebApps.Enabled.Group" ContextInstance="7ca83ef3-7d35-3b36-027f-19b393df4789" Enforced="false" Monitor="Azure.WebApp.URLWatcher.ResponseTimeMonitor" Property="Enabled">
+        <Value>true</Value>
+      </MonitorPropertyOverride>
+      <MonitorPropertyOverride ID="OverrideForMonitorAzureWebAppURLWatcherErrorCodeMonitorForContextAzureWebAppsEnabledGroupf65cbf5b33284151b4897ad7e1ef519a" Context="Azure.WebApps.Enabled.Group" ContextInstance="7ca83ef3-7d35-3b36-027f-19b393df4789" Enforced="false" Monitor="Azure.WebApp.URLWatcher.ErrorCodeMonitor" Property="Enabled">
+        <Value>true</Value>
+      </MonitorPropertyOverride>
+      <MonitorPropertyOverride ID="OverrideForMonitorAzureWebAppRunningStateMonitorForContextAzureWebAppsEnabledGroup45dca015cef04a04a6aba94e58267381" Context="Azure.WebApps.Enabled.Group" ContextInstance="7ca83ef3-7d35-3b36-027f-19b393df4789" Enforced="false" Monitor="Azure.WebApp.RunningState.Monitor" Property="Enabled">
+        <Value>true</Value>
+      </MonitorPropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleAzureWebAppTransactionResponseTimeForContextAzureWebAppsEnabledGroupd1b926911ac34a7087352b3f495e0cc6" Context="Azure.WebApps.Enabled.Group" ContextInstance="7ca83ef3-7d35-3b36-027f-19b393df4789" Enforced="false" Rule="Azure.WebApp.TransactionResponseTime" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+    </Overrides>
+    <ServiceLevelObjectives>
+      <MonitorSLO ID="Azure.WebApp.MonitorSLO" ConfigurationGroupId="Azure.WebApp.SLA" Target="Azure.WebApp">
+        <MonitorId>Health!System.Health.AvailabilityState</MonitorId>
+        <Goal>96</Goal>
+      </MonitorSLO>
+    </ServiceLevelObjectives>
+  </Monitoring>
+  <ConfigurationGroups>
+    <ConfigurationGroup ID="Azure.WebApp.SLA" Accessibility="Public" Target="Azure.WebApp" Context="System!System.Entity" ContextInstance="7ca83ef3-7d35-3b36-027f-19b393df4789" />
+  </ConfigurationGroups>
+  <Presentation>
+    <Views>
+      <View ID="Azure.WebApps.AlertsView" Accessibility="Public" Enabled="true" Target="Azure.WebApp" TypeID="SC!Microsoft.SystemCenter.AlertViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <ResolutionState>
+            <StateRange Operator="NotEquals">255</StateRange>
+          </ResolutionState>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="22" Grouped="true" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Severity</Name>
+            <Id>Severity</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="54" Grouped="false" Sorted="false" IsSortable="false" Visible="true" SortOrder="Ascending">
+            <Name>Icon</Name>
+            <Id>Icon</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>MonitoringObjectPath</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Source</Name>
+            <Id>MonitoringObjectDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="22" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>MonitoringObjectInMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="250" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Resolution State</Name>
+            <Id>ResolutionState</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="150" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Created</Name>
+            <Id>TimeRaised</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="1" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Age</Name>
+            <Id>Age</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Type</Name>
+            <Id>Category</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Owner</Name>
+            <Id>Owner</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Priority</Name>
+            <Id>Priority</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Latency</Name>
+            <Id>Latency</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Description</Name>
+            <Id>Description</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Connector</Name>
+            <Id>ConnectorId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Forwarding Status</Name>
+            <Id>ConnectorStatus</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Class</Name>
+            <Id>Class</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Time in State</Name>
+            <Id>TimeInState</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 1</Name>
+            <Id>CustomField1</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 2</Name>
+            <Id>CustomField2</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="20" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 3</Name>
+            <Id>CustomField3</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="21" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 4</Name>
+            <Id>CustomField4</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="22" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 5</Name>
+            <Id>CustomField5</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="23" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 6</Name>
+            <Id>CustomField6</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="24" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 7</Name>
+            <Id>CustomField7</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="25" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 8</Name>
+            <Id>CustomField8</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="26" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 9</Name>
+            <Id>CustomField9</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="27" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Custom Field 10</Name>
+            <Id>CustomField10</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="28" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Resolved By</Name>
+            <Id>ResolvedBy</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="29" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Time Resolved</Name>
+            <Id>TimeResolved</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="30" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Last State Change</Name>
+            <Id>TimeResolutionStateLastModified</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="31" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Last Modified</Name>
+            <Id>LastModified</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="32" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Last Modified By</Name>
+            <Id>LastModifiedBy</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="33" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Management Group</Name>
+            <Id>ManagementGroup</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="34" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Site</Name>
+            <Id>SiteName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="35" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Repeat Count</Name>
+            <Id>RepeatCount</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="36" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Ticket ID</Name>
+            <Id>TicketId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="37" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>TFS Work Item ID</Name>
+            <Id>TfsWorkItemId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="38" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>TFS Work Item Owner</Name>
+            <Id>TfsWorkItemOwner</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target />
+      </View>
+      <View ID="Azure.WebApps.StateView" Accessibility="Public" Enabled="true" Target="Azure.WebApp" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <InMaintenanceMode>false</InMaintenanceMode>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Azure.WebApp-*-b208963e-40d6-5af1-fc60-96049ac4e084-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Enabled</Name>
+            <Id>Azure.WebApp/Enabled</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>State</Name>
+            <Id>Azure.WebApp/State</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Usage State</Name>
+            <Id>Azure.WebApp/UsageState</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Host Names</Name>
+            <Id>Azure.WebApp/HostNames</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Enabled Host Names</Name>
+            <Id>Azure.WebApp/EnabledHostNames</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Admin Enabled</Name>
+            <Id>Azure.WebApp/AdminEnabled</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Sku</Name>
+            <Id>Azure.WebApp/Sku</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Repository Site Name</Name>
+            <Id>Azure.WebApp/RepositorySiteName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Repository Uri</Name>
+            <Id>Azure.WebApp/RepositoryUri</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Web Space</Name>
+            <Id>Azure.WebApp/WebSpace</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>URL</Name>
+            <Id>Azure.WebApp/URL</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>NumberOfWorkers</Name>
+            <Id>Azure.WebApp/NumberOfWorkers</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>WebSocketsEnabled</Name>
+            <Id>Azure.WebApp/WebSocketsEnabled</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Use32BitWorkerProcess</Name>
+            <Id>Azure.WebApp/Use32BitWorkerProcess</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DefaultDocuments</Name>
+            <Id>Azure.WebApp/DefaultDocuments</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="20" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>NetFrameworkVersion</Name>
+            <Id>Azure.WebApp/NetFrameworkVersion</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="21" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>PhpVersion</Name>
+            <Id>Azure.WebApp/PhpVersion</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="22" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>RequestTracingEnabled</Name>
+            <Id>Azure.WebApp/RequestTracingEnabled</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="23" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>HttpLoggingEnabled</Name>
+            <Id>Azure.WebApp/HttpLoggingEnabled</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="24" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DetailedErrorLoggingEnabled</Name>
+            <Id>Azure.WebApp/DetailedErrorLoggingEnabled</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target />
+      </View>
+      <View ID="Azure.WebApps.PerfView" Accessibility="Public" Enabled="true" Target="Azure.WebApp" TypeID="SC!Microsoft.SystemCenter.PerformanceViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria />
+        <Presentation>
+          <SortedColumnIndex>0</SortedColumnIndex>
+          <SortOrder>0</SortOrder>
+          <StartTime>2015-03-17T13:43:24.2766301-04:00</StartTime>
+          <EndTime>2015-03-18T13:43:24.2766301-04:00</EndTime>
+          <DynamicTimeTicks>864000000000</DynamicTimeTicks>
+          <IsDynamic>true</IsDynamic>
+          <Is3DMode>false</Is3DMode>
+          <ShowAlerts>false</ShowAlerts>
+          <ShowMaintenanceMode>false</ShowMaintenanceMode>
+          <BaselineMode>false</BaselineMode>
+          <ShowPointLabels>false</ShowPointLabels>
+          <EnableSmartLabels>true</EnableSmartLabels>
+          <RightAngleAxes>false</RightAngleAxes>
+          <ClusterSeries>false</ClusterSeries>
+          <Title />
+          <TitleFont>Microsoft Sans Serif,12,Regular</TitleFont>
+          <ChartFont>Microsoft Sans Serif,8.25,Regular</ChartFont>
+          <ShowBands>false</ShowBands>
+          <BandColor>-1579033</BandColor>
+          <ChartType>Line</ChartType>
+          <Depth>100</Depth>
+          <GapDepth>100</GapDepth>
+          <Perspective>10</Perspective>
+          <GraphXRotation>0</GraphXRotation>
+          <GraphYRotation>0</GraphYRotation>
+          <XLabelAngle>0</XLabelAngle>
+          <LabelColor>-16777216</LabelColor>
+          <LabelFont>Microsoft Sans Serif,8.25,Regular</LabelFont>
+          <XAxisVisible>True</XAxisVisible>
+          <XShowMajorGridlines>false</XShowMajorGridlines>
+          <XShowMinorGridlines>false</XShowMinorGridlines>
+          <ShowInterlaceStrips>false</ShowInterlaceStrips>
+          <XInterlaceColor>16777215</XInterlaceColor>
+          <XShowSideMargin>true</XShowSideMargin>
+          <XAxisFont>Microsoft Sans Serif,8.25,Regular</XAxisFont>
+          <AutoAxis>true</AutoAxis>
+          <AxisMax>100</AxisMax>
+          <AxisMin>0</AxisMin>
+          <YAxisVisible>True</YAxisVisible>
+          <YShowMajorGridlines>true</YShowMajorGridlines>
+          <YShowMinorGridlines>false</YShowMinorGridlines>
+          <YShowInterlaceStrips>false</YShowInterlaceStrips>
+          <YShowSideMargin>true</YShowSideMargin>
+          <YAxisFont>Microsoft Sans Serif,8.25,Regular</YAxisFont>
+          <BackgroundColor1>-1</BackgroundColor1>
+          <BackgroundColor2>-1</BackgroundColor2>
+          <GradientType>None</GradientType>
+          <Series />
+        </Presentation>
+        <Target />
+      </View>
+    </Views>
+    <Folders>
+      <Folder ID="Azure.WebApps.FolderView" Accessibility="Public" ParentFolder="WindowsAzure!Microsoft.SystemCenter.WindowsAzure.Folder.Root" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ElementID="Azure.WebApps.AlertsView" ID="i6b3596b59e9c47fd9c1195197978f406" Folder="Azure.WebApps.FolderView" />
+      <FolderItem ElementID="Azure.WebApps.StateView" ID="i971d9764d4cc405a8acbac63df51adab" Folder="Azure.WebApps.FolderView" />
+      <FolderItem ElementID="Azure.WebApps.PerfView" ID="i5c28fe110b974100a5139eb5c924cff8" Folder="Azure.WebApps.FolderView" />
+    </FolderItems>
+    <StringResources>
+      <StringResource ID="Azure.WebApp.URLWatcher.ErrorCodeMonitor_AlertMessageResourceID" />
+      <StringResource ID="Azure.WebApp.RunningState.Monitor_AlertMessageResourceID" />
+      <StringResource ID="Azure.WebApp.URLWatcher.ContentMatchMonitor_AlertMessageResourceID" />
+      <StringResource ID="Azure.WebApp.URLWatcher.ResponseTimeMonitor_AlertMessageResourceID" />
+    </StringResources>
+    <ComponentTypes>
+      <ComponentType ID="Azure.WebApp.Dashboard.View" Accessibility="Public" Base="SystemCenter!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl" Lifetime="ReferenceCount" />
+      <ComponentType ID="Azure.WebApp.SLADashboard.View" Accessibility="Public" Base="SystemCenter1!Microsoft.SystemCenter.Visualization.SlaDashboard" Lifetime="ReferenceCount" />
+    </ComponentTypes>
+    <ComponentReferences>
+      <ComponentReference ID="Azure.WebApp.Dashboard.ViewReference_d828137f5fa7406abe61319065f83a93" Accessibility="Public" TypeID="Azure.WebApp.Dashboard.View" Parent="Azure.WebApps.FolderView" />
+      <ComponentReference ID="Azure.WebApp.SLADashboard.ViewReference_420b45cc681d4aad90c4653abd464382" Accessibility="Public" TypeID="Azure.WebApp.SLADashboard.View" Parent="Azure.WebApps.FolderView" />
+    </ComponentReferences>
+    <ComponentOverrides>
+      <ComponentOverride ID="Azure.WebApp.Dashboard.ViewOverride" TypeID="Azure.WebApp.Dashboard.View" />
+      <ComponentOverride ID="Microsoft.SystemCenter.GTM.Summary.Dashboard.ObjectPerformanceWidgetOverride_4ac8f241_5e04_47eb_ae80_7f58fa534774" TypeID="SystemCenter!Microsoft.SystemCenter.GTM.Summary.Dashboard.ObjectPerformanceWidget" Context="/Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell!Azure.WebApp.Dashboard.View/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/TopPerfNGTM/Microsoft.SystemCenter.Visualization.Library!ComposedRegion/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.ObjectPerformanceWidget/">
+        <Bindings>
+          <Binding PropertyId="AutoRefreshTickInterval">
+            <SimpleValue Type="xsd://integer" Value="1800" />
+          </Binding>
+          <Binding PropertyId="PerformanceObjectCounter">
+            <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.DataSourceTypes/PerformanceDataSeriesQueryType">
+              <Binding PropertyId="PerformanceObjectName">
+                <SimpleValue Type="xsd://string" Value="Web Application" />
+              </Binding>
+              <Binding PropertyId="PerformanceCounterName">
+                <SimpleValue Type="xsd://string" Value="Total Web Application Response Time" />
+              </Binding>
+              <Binding PropertyId="PerformanceCounterInstanceName">
+                <SimpleValue Type="xsd://string" Value="" />
+              </Binding>
+              <Binding PropertyId="ManagedEntityIds">
+                <ComplexValueCollection Type="mpinstance://System.Library!System.Entity[]">
+                  <ComplexValue Type="mpinstance://System.Library!System.Entity">
+                    <Binding PropertyId="Id">
+                      <SimpleValue Type="xsd://string" Value="7ca83ef3-7d35-3b36-027f-19b393df4789" />
+                    </Binding>
+                  </ComplexValue>
+                </ComplexValueCollection>
+              </Binding>
+              <Binding PropertyId="DatapointReduction">
+                <SimpleValue Type="xsd://string" Value="Average" />
+              </Binding>
+            </ComplexValue>
+          </Binding>
+          <Binding PropertyId="TimeInterval">
+            <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DynamicDateTimeRange">
+              <Binding PropertyId="StartPoint">
+                <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DateTimeRangePart">
+                  <Binding PropertyId="BaseDateTime">
+                    <SimpleValue Type="xsd://string" Value="Present" />
+                  </Binding>
+                  <Binding PropertyId="Offset">
+                    <SimpleValue Type="xsd://integer" Value="-1" />
+                  </Binding>
+                  <Binding PropertyId="OffsetType">
+                    <SimpleValue Type="xsd://string" Value="Hour" />
+                  </Binding>
+                </ComplexValue>
+              </Binding>
+              <Binding PropertyId="EndPoint">
+                <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DateTimeRangePart">
+                  <Binding PropertyId="BaseDateTime">
+                    <SimpleValue Type="xsd://string" Value="Present" />
+                  </Binding>
+                  <Binding PropertyId="Offset">
+                    <SimpleValue Type="xsd://integer" Value="0" />
+                  </Binding>
+                  <Binding PropertyId="OffsetType">
+                    <SimpleValue Type="xsd://string" Value="Day" />
+                  </Binding>
+                </ComplexValue>
+              </Binding>
+            </ComplexValue>
+          </Binding>
+          <Binding PropertyId="MaxTimeIntervalValue">
+            <SimpleValue Type="xsd://integer" Value="10" />
+          </Binding>
+          <Binding PropertyId="NumberOfEntities">
+            <SimpleValue Type="xsd://integer" Value="10" />
+          </Binding>
+          <Binding PropertyId="ReturnBottomN">
+            <SimpleValue Type="xsd://boolean" Value="False" />
+          </Binding>
+          <Binding PropertyId="Columns">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.Target/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="False" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="DisplayName" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.Path/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="False" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="Path" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.AverageValue/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="False" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="ModeledAverageValue" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="AutoCalculate">
+            <SimpleValue Type="xsd://boolean" Value="True" />
+          </Binding>
+          <Binding PropertyId="Maximum">
+            <SimpleValue Type="xsd://integer" Value="100" />
+          </Binding>
+          <Binding PropertyId="Minimum">
+            <SimpleValue Type="xsd://integer" Value="0" />
+          </Binding>
+        </Bindings>
+      </ComponentOverride>
+      <ComponentOverride ID="Microsoft.SystemCenter.GTM.Summary.Dashboard.PerfWidgetOverride_949d35cb_64b9_4237_b048_9a2fc544f446" TypeID="SystemCenter!Microsoft.SystemCenter.GTM.Summary.Dashboard.PerfWidget" Context="/Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell!Azure.WebApp.Dashboard.View/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/PerfWidgetGTM/Microsoft.SystemCenter.Visualization.Library!ComposedRegion/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.PerfWidget/">
+        <Bindings>
+          <Binding PropertyId="PerformanceObjectCounters">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.DataSourceTypes/PerformanceDataSeriesQueryType[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.DataSourceTypes/PerformanceDataSeriesQueryType">
+                <Binding PropertyId="PerformanceObjectName">
+                  <SimpleValue Type="xsd://string" Value="Web Application" />
+                </Binding>
+                <Binding PropertyId="PerformanceCounterName">
+                  <SimpleValue Type="xsd://string" Value="Total Web Application Response Time" />
+                </Binding>
+                <Binding PropertyId="PerformanceCounterInstanceName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="ManagedEntityIds">
+                  <ComplexValueCollection Type="mpinstance://System.Library!System.Entity[]">
+                    <ComplexValue Type="mpinstance://System.Library!System.Entity">
+                      <Binding PropertyId="Id">
+                        <SimpleValue Type="xsd://string" Value="7ca83ef3-7d35-3b36-027f-19b393df4789" />
+                      </Binding>
+                    </ComplexValue>
+                  </ComplexValueCollection>
+                </Binding>
+                <Binding PropertyId="DatapointReduction">
+                  <SimpleValue Type="xsd://string" Value="Average" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="DateRange">
+            <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DynamicDateTimeRange">
+              <Binding PropertyId="StartPoint">
+                <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DateTimeRangePart">
+                  <Binding PropertyId="BaseDateTime">
+                    <SimpleValue Type="xsd://string" Value="Present" />
+                  </Binding>
+                  <Binding PropertyId="Offset">
+                    <SimpleValue Type="xsd://integer" Value="-24" />
+                  </Binding>
+                  <Binding PropertyId="OffsetType">
+                    <SimpleValue Type="xsd://string" Value="Hour" />
+                  </Binding>
+                </ComplexValue>
+              </Binding>
+              <Binding PropertyId="EndPoint">
+                <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DateTimeRangePart">
+                  <Binding PropertyId="BaseDateTime">
+                    <SimpleValue Type="xsd://string" Value="Present" />
+                  </Binding>
+                  <Binding PropertyId="Offset">
+                    <SimpleValue Type="xsd://integer" Value="0" />
+                  </Binding>
+                  <Binding PropertyId="OffsetType">
+                    <SimpleValue Type="xsd://string" Value="Day" />
+                  </Binding>
+                </ComplexValue>
+              </Binding>
+            </ComplexValue>
+          </Binding>
+          <Binding PropertyId="Axes">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/LinearAxis[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/LinearAxis">
+                <Binding PropertyId="Minimum">
+                  <SimpleValue Type="xsd://integer" Value="0" />
+                </Binding>
+                <Binding PropertyId="Maximum">
+                  <SimpleValue Type="xsd://integer" Value="100" />
+                </Binding>
+                <Binding PropertyId="IntervalSeconds">
+                  <SimpleValue Type="xsd://integer" Value="0" />
+                </Binding>
+                <Binding PropertyId="AutoCalculate">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Title">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="Orientation">
+                  <SimpleValue Type="xsd://string" Value="Y" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="ShowLegend">
+            <SimpleValue Type="xsd://boolean" Value="True" />
+          </Binding>
+          <Binding PropertyId="LegendColumns">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.Target/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="DisplayName" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.Path/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="*" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="Path" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.LastValue/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="*" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="LastValue" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.AverageValue/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="*" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="AverageValue" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Configuration.Library!Microsoft.SystemCenter.Visualization.Library.PerfChartConfigColumns.MaximumValue/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="*" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="MaximumValue" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+        </Bindings>
+      </ComponentOverride>
+      <ComponentOverride ID="Microsoft.SystemCenter.GTM.Summary.Dashboard.StateWidgetOverride_f4f5e534_3778_48cb_b916_6fb2920f4ba6" TypeID="SystemCenter!Microsoft.SystemCenter.GTM.Summary.Dashboard.StateWidget" Context="/Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell!Azure.WebApp.Dashboard.View/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/StateWidgetGTM/Microsoft.SystemCenter.Visualization.Library!ComposedRegion/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.StateWidget/">
+        <Bindings>
+          <Binding PropertyId="TargetIds">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.DataProvider/MPInstanceWithRecursionLevel[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.DataProvider/MPInstanceWithRecursionLevel">
+                <Binding PropertyId="MPInstance">
+                  <ComplexValue Type="mpinstance://System.Library!System.Entity">
+                    <Binding PropertyId="Id">
+                      <SimpleValue Type="xsd://string" Value="7ca83ef3-7d35-3b36-027f-19b393df4789" />
+                    </Binding>
+                  </ComplexValue>
+                </Binding>
+                <Binding PropertyId="RecursionLevel">
+                  <SimpleValue Type="xsd://int" Value="-1" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="BaseManagementPackTypes">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.OperationalDataTypes/BaseManagementPackType[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.OperationalDataTypes/BaseManagementPackType">
+                <Binding PropertyId="FullyQualifiedName">
+                  <SimpleValue Type="xsd://string" Value="Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell!Azure.WebApp" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="ShowSearchBar">
+            <SimpleValue Type="xsd://boolean" Value="True" />
+          </Binding>
+          <Binding PropertyId="Columns">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.Library.Entity.HealthState/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="HealthState" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='HealthState']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.Library.Entity.InMaintenanceMode/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="InMaintenanceMode" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='InMaintenanceMode']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.Library.Entity.Path/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="Path" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='Path']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="DisplayName" />
+                </Binding>
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="Display Name" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/PropertyCollection[Name='DisplayName']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="State" />
+                </Binding>
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="State" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/PropertyCollection[Name='State']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="HostNames" />
+                </Binding>
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="Host Names" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/PropertyCollection[Name='HostNames']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="WebSpace" />
+                </Binding>
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="Web Space" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/PropertyCollection[Name='WebSpace']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="ManagedEntity" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+        </Bindings>
+      </ComponentOverride>
+      <ComponentOverride ID="Microsoft.SystemCenter.GTM.Summary.Dashboard.AlertWidgetOverride_3ed686fb_9650_4518_a586_343e18f36b50" TypeID="SystemCenter!Microsoft.SystemCenter.GTM.Summary.Dashboard.AlertWidget" Context="/Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell!Azure.WebApp.Dashboard.View/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.DashboardControl/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.StaticGridLayout/TwentyFourHourAlertWidgetGTM/Microsoft.SystemCenter.Visualization.Library!ComposedRegion/Microsoft.SystemCenter.GTM.Summary.Dashboard.Template!Microsoft.SystemCenter.GTM.Summary.Dashboard.AlertWidget/">
+        <Bindings>
+          <Binding PropertyId="TargetIds">
+            <ComplexValueCollection Type="mpinstance://System.Library!System.Entity[]">
+              <ComplexValue Type="mpinstance://System.Library!System.Entity">
+                <Binding PropertyId="Id">
+                  <SimpleValue Type="xsd://string" Value="7ca83ef3-7d35-3b36-027f-19b393df4789" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="Criteria">
+            <SimpleValue Type="xsd://string" Value="&#xA;  &lt;ResolutionState&gt;&#xA;    &lt;State&gt;0&lt;/State&gt;&#xA;    &lt;State&gt;247&lt;/State&gt;&#xA;    &lt;State&gt;248&lt;/State&gt;&#xA;    &lt;State&gt;249&lt;/State&gt;&#xA;    &lt;State&gt;250&lt;/State&gt;&#xA;    &lt;State&gt;254&lt;/State&gt;&#xA;  &lt;/ResolutionState&gt;&#xA;" />
+          </Binding>
+          <Binding PropertyId="Columns">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.Severity/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="False" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="Severity" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='Severity']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.MonitoringObjectDisplayName/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="MonitoringObjectDisplayName" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='MonitoringObjectDisplayName']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.MonitoringObjectInMaintenanceMode/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="MonitoringObjectInMaintenanceMode" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='MonitoringObjectInMaintenanceMode']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.Name/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="Name" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='Name']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.Age/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="False" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="Age" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='Age']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.RepeatCount/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="RepeatCount" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='RepeatCount']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.LastModified/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.LocalDateTimeLabel" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.LocalDateTimeLabel" />
+                </Binding>
+                <Binding PropertyId="HeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="False" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="LastModified" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='LastModified']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataGridColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.ResolutionState/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="SortableGroupable">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="CanResize">
+                  <SimpleValue Type="xsd://boolean" Value="True" />
+                </Binding>
+                <Binding PropertyId="Width">
+                  <SimpleValue Type="xsd://string" Value="Auto" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="ResolutionStateDisplayName" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='ResolutionStateDisplayName']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="SortedColumns">
+            <ComplexValueCollection Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataCollectionViewColumn[]">
+              <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ColumnType/DataCollectionViewColumn">
+                <Binding PropertyId="HeaderDisplayObject">
+                  <SimpleValue Type="xsd://string" Value="$MPReference/Microsoft.SystemCenter.Visualization.Library!OperationalDataTypes.AlertType.LastModified/DisplayName$" />
+                </Binding>
+                <Binding PropertyId="CellComponentType">
+                  <SimpleValue Type="xsd://string" Value="Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.LocalDateTimeLabel" />
+                </Binding>
+                <Binding PropertyId="GroupHeaderComponentType">
+                  <SimpleValue Type="xsd://string" Value="Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.LocalDateTimeLabel" />
+                </Binding>
+                <Binding PropertyId="SortDirection">
+                  <SimpleValue Type="xsd://string" Value="Descending" />
+                </Binding>
+                <Binding PropertyId="PropertyName">
+                  <SimpleValue Type="xsd://string" Value="LastModified" />
+                </Binding>
+                <Binding PropertyId="DisplayName">
+                  <SimpleValue Type="xsd://string" Value="" />
+                </Binding>
+                <Binding PropertyId="XPath">
+                  <SimpleValue Type="xsd://string" Value="$Object/Property[Name='LastModified']$" />
+                </Binding>
+                <Binding PropertyId="SourceType">
+                  <SimpleValue Type="xsd://string" Value="Alert" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="EnableInlineDetails">
+            <SimpleValue Type="xsd://boolean" Value="True" />
+          </Binding>
+        </Bindings>
+      </ComponentOverride>
+      <ComponentOverride ID="Azure.WebApp.SLADashboard.ViewOverride" TypeID="Azure.WebApp.SLADashboard.View">
+        <Bindings>
+          <Binding PropertyId="ServiceLevel">
+            <ComplexValueCollection Type="mpschema://Microsoft.EnterpriseManagement.Configuration.ManagementPackConfigurationGroup[]">
+              <ComplexValue Type="mpschema://Microsoft.EnterpriseManagement.Configuration.ManagementPackConfigurationGroup">
+                <Binding PropertyId="Id">
+                  <SimpleValue Type="xsd://string" Value="18a77ecb-8fae-eea2-50cb-97a004766516" />
+                </Binding>
+              </ComplexValue>
+            </ComplexValueCollection>
+          </Binding>
+          <Binding PropertyId="TimeInterval">
+            <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DynamicDateTimeRange">
+              <Binding PropertyId="StartPoint">
+                <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DateTimeRangePart">
+                  <Binding PropertyId="BaseDateTime">
+                    <SimpleValue Type="xsd://string" Value="Present" />
+                  </Binding>
+                  <Binding PropertyId="Offset">
+                    <SimpleValue Type="xsd://integer" Value="-24" />
+                  </Binding>
+                  <Binding PropertyId="OffsetType">
+                    <SimpleValue Type="xsd://string" Value="Hour" />
+                  </Binding>
+                </ComplexValue>
+              </Binding>
+              <Binding PropertyId="EndPoint">
+                <ComplexValue Type="xsd://Microsoft.SystemCenter.Visualization.Library!Microsoft.SystemCenter.Visualization.ChartDataTypes/DateTimeRangePart">
+                  <Binding PropertyId="BaseDateTime">
+                    <SimpleValue Type="xsd://string" Value="Present" />
+                  </Binding>
+                  <Binding PropertyId="Offset">
+                    <SimpleValue Type="xsd://integer" Value="0" />
+                  </Binding>
+                  <Binding PropertyId="OffsetType">
+                    <SimpleValue Type="xsd://string" Value="Day" />
+                  </Binding>
+                </ComplexValue>
+              </Binding>
+            </ComplexValue>
+          </Binding>
+        </Bindings>
+      </ComponentOverride>
+    </ComponentOverrides>
+    <ComponentImplementations>
+      <ComponentImplementation ID="Azure.WebApp.Dashboard.ViewImplementation" Accessibility="Public" TypeId="Azure.WebApp.Dashboard.View" Platform="Wpf, Silverlight">
+        <Composite>
+          <Base />
+        </Composite>
+      </ComponentImplementation>
+      <ComponentImplementation ID="Azure.WebApp.SLADashboard.ViewImplementation" Accessibility="Public" TypeId="Azure.WebApp.SLADashboard.View" Platform="Wpf, Silverlight">
+        <Composite>
+          <Base />
+        </Composite>
+      </ComponentImplementation>
+    </ComponentImplementations>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell">
+          <Name>Example - Microsoft Azure Web App Monitoring via PowerShell</Name>
+          <Description>This management pack requires the Windows Azure Management Pack to be installed and configured with a subscription, and Azure PowerShell to be installed on any Management Server that is member of the pool monitoring the subscription. For proxy support, implement for PowerShell, see: http://dunnry.com/blog/2010/01/25/SupportingBasicAuthProxies.aspx</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp">
+          <Name>Azure Web App</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="Enabled">
+          <Name>Enabled</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="State">
+          <Name>State</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="UsageState">
+          <Name>Usage State</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="HostNames">
+          <Name>Host Names</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="EnabledHostNames">
+          <Name>Enabled Host Names</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="AdminEnabled">
+          <Name>Admin Enabled</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="Sku">
+          <Name>Sku</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="RepositorySiteName">
+          <Name>Repository Site Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="RepositoryUri">
+          <Name>Repository Uri</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="WebSpace">
+          <Name>Web Space</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp" SubElementID="URL">
+          <Name>URL</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.PowerShellDiscovery">
+          <Name>Azure Web App PowerShell Discovery</Name>
+          <Description>This script-based discovery targets Azure Subscriptions and discovered any web apps hosted under the account.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.PowerShellDiscovery.DS">
+          <Name>Azure Web App PowerShell Discovery Provider</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.TimedPowerShellPropertyBag.DS">
+          <Name>Azure Web App Timed PowerShell Property Bag Provider</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ErrorCodeMonitor">
+          <Name>Azure Web App Error Code</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ErrorCodeMonitor" SubElementID="ErrorCodeMonitorStateError">
+          <Name>Error Code Failure</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ErrorCodeMonitor" SubElementID="ErrorCodeMonitorStateSuccess">
+          <Name>Error Code OK</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ResponseTimeMonitor">
+          <Name>Azure Web App Response Time</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ResponseTimeMonitor" SubElementID="ResponseTimeMonitorStateError">
+          <Name>Response Time Failure</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ResponseTimeMonitor" SubElementID="ResponseTimeMonitorStateSuccess">
+          <Name>Response Time OK</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ContentMatchMonitor">
+          <Name>Azure Web App Content Match</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ContentMatchMonitor" SubElementID="ContentMatchMonitorStateSuccess">
+          <Name>Content Match Criteria OK</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ContentMatchMonitor" SubElementID="ContentMatchMonitorStateError">
+          <Name>Content Match Criteria Error</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.RunningState.Monitor">
+          <Name>Azure Web App Running State</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.RunningState.Monitor" SubElementID="RunningStateError">
+          <Name>Not Running</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.RunningState.Monitor" SubElementID="RunningStateSuccess">
+          <Name>Running</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.Enabled.Group">
+          <Name>Azure Web Apps Enabled</Name>
+          <Description>These web apps have the Enabled property set to true, and will be enabled for availability monitoring.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.Enabled.Group.DiscoveryRule">
+          <Name>Populate Azure Web Apps Enabled</Name>
+          <Description>This discovery rule populates the group 'Azure Web Apps Enabled'</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.FolderView">
+          <Name>Azure Web Apps</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.AlertsView">
+          <Name>Alerts</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.StateView">
+          <Name>State</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.Group">
+          <Name>Azure Web Apps</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.Group.DiscoveryRule">
+          <Name>Populate Azure Web Apps</Name>
+          <Description>This discovery rule populates the group 'Azure Web Apps'</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApps.PerfView">
+          <Name>Performance</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ErrorCodeMonitor_AlertMessageResourceID">
+          <Name>Azure Web App Error Code</Name>
+          <Description>Azure Web App {0} is returning a {1} status code.
+
+URL: {2}
+Last discovered state: {3}
+Usage state: {4}
+Enabled: {5}
+
+Subscription ID: {6}
+Subscription Name: {7}
+</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.RunningState.Monitor_AlertMessageResourceID">
+          <Name>Azure Web App Running State</Name>
+          <Description>Azure Web App {0} may not be running, and is presently in a {1} state.
+
+URL: {2}
+Last discovered state: {3}
+Usage state: {4}
+Enabled: {5}
+
+Subscription ID: {6}
+Subscription Name: {7}
+</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ContentMatchMonitor_AlertMessageResourceID">
+          <Name>Azure Web App Content Match</Name>
+          <Description>Azure Web App {0} did not match the configured content criteria.
+
+URL: {1}
+Last discovered state: {2}
+Usage state: {3}
+Enabled: {4}
+
+Subscription ID: {5}
+Subscription Name: {6}</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.URLWatcher.ResponseTimeMonitor_AlertMessageResourceID">
+          <Name>Azure Web App Response Time</Name>
+          <Description>Azure Web App {0} is taking too long to respond. Reponse Time: {1}
+
+URL: {2}
+Last discovered state: {3}
+Usage state: {4}
+Enabled: {5}
+
+Subscription ID: {6}
+Subscription Name: {7}</Description>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.SLA">
+          <Name>Azure Web App SLA</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.MonitorSLO">
+          <Name>Availability</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.Dashboard.View">
+          <Name>Dashboard</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.Dashboard.ViewOverride">
+          <Name>Dashboard</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.SystemCenter.GTM.Summary.Dashboard.ObjectPerformanceWidgetOverride_4ac8f241_5e04_47eb_ae80_7f58fa534774">
+          <Name>Highest Response Times for Last Hour</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.SystemCenter.GTM.Summary.Dashboard.PerfWidgetOverride_949d35cb_64b9_4237_b048_9a2fc544f446">
+          <Name>Performance</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.SystemCenter.GTM.Summary.Dashboard.StateWidgetOverride_f4f5e534_3778_48cb_b916_6fb2920f4ba6">
+          <Name>State</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.SystemCenter.GTM.Summary.Dashboard.AlertWidgetOverride_3ed686fb_9650_4518_a586_343e18f36b50">
+          <Name>Alerts</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.SLADashboard.View">
+          <Name>Service Level</Name>
+        </DisplayString>
+        <DisplayString ElementID="Azure.WebApp.SLADashboard.ViewOverride">
+          <Name>Service Level</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>
