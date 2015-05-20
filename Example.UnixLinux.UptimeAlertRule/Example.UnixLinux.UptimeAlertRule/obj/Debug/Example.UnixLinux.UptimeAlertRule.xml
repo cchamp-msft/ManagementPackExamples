@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>Example.UnixLinux.UptimeAlertRule</ID>
-      <Version>1.0.0.11</Version>
+      <Version>1.0.0.12</Version>
     </Identity>
     <Name>Example UNIX/Linux System Uptime Alert</Name>
     <References>
@@ -104,13 +104,13 @@
             <Uri>http://schemas.microsoft.com/wbem/wscim/1/cim-schema/2/SCX_OperatingSystem?__cimnamespace=root/scx</Uri>
             <Filter />
             <SplitItems>true</SplitItems>
-            <Interval>30</Interval>
+            <Interval>300</Interval>
             <ObjectName>System</ObjectName>
             <CounterName>Uptime</CounterName>
             <InstanceName></InstanceName>
             <Value>$Data/WsManData/*[local-name(.)='SCX_OperatingSystem']/*[local-name(.)='SystemUpTime']$</Value>
-            <NumSamples>1</NumSamples>
-            <Threshold>1</Threshold>
+            <NumSamples>2</NumSamples>
+            <Threshold>0</Threshold>
             <Operator>Less</Operator>
           </DataSource>
         </DataSources>
