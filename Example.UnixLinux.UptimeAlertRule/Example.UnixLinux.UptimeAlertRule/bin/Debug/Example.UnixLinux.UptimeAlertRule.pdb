@@ -1,5 +1,5 @@
 Uptime.mptg.mpx*Example.Unix.WSMan.PerfCounterProvider.Delta*6*8*DataSourceModuleType
 Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule*66*8*Rule
-Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage*100*8*StringResource
-Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule*106*10*DisplayString
-Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage*110*10*DisplayString
+Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage*113*8*StringResource
+Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule*119*10*DisplayString
+Uptime.mptg.mpx*Example.UnixLinux.UptimeAlertRule.Example.UnixLinux.UptimeAlertRule.Rule.AlertMessage*123*10*DisplayString

@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>Example.UnixLinux.UptimeAlertRule</ID>
-      <Version>1.0.0.12</Version>
+      <Version>1.0.0.15</Version>
     </Identity>
     <Name>Example UNIX/Linux System Uptime Alert</Name>
     <References>
@@ -109,11 +109,24 @@
             <CounterName>Uptime</CounterName>
             <InstanceName></InstanceName>
             <Value>$Data/WsManData/*[local-name(.)='SCX_OperatingSystem']/*[local-name(.)='SystemUpTime']$</Value>
-            <NumSamples>2</NumSamples>
+            <NumSamples>1</NumSamples>
             <Threshold>0</Threshold>
             <Operator>Less</Operator>
           </DataSource>
         </DataSources>
+        <ConditionDetection ID="CD" TypeID="System!System.ExpressionFilter">
+          <Expression>
+            <SimpleExpression>
+              <ValueExpression>
+                <XPathQuery Type="Double">Value</XPathQuery>
+              </ValueExpression>
+              <Operator>Less</Operator>
+              <ValueExpression>
+                <Value Type="Double">0</Value>
+              </ValueExpression>
+            </SimpleExpression>
+          </Expression>
+        </ConditionDetection>
         <WriteActions>
           <WriteAction ID="Alert" TypeID="Health!System.Health.GenerateAlert">
             <Priority>1</Priority>
