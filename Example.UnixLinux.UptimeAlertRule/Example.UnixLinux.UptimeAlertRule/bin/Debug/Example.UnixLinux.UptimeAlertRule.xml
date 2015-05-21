@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>Example.UnixLinux.UptimeAlertRule</ID>
-      <Version>1.0.0.15</Version>
+      <Version>1.0.0.17</Version>
     </Identity>
     <Name>Example UNIX/Linux System Uptime Alert</Name>
     <References>
