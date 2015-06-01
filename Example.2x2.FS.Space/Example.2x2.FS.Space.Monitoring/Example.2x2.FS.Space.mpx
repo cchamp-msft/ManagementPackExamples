@@ -1,3 +1,216 @@
 ﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  
+<TypeDefinitions>
+  <MonitorTypes>
+      <UnitMonitorType ID="Microsoft.Unix.WSMan.LogicalDisk.FreeSpace.TwoState.MonitorType" Accessibility="Public">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="UnderThreshold" NoDetection="false" />
+          <MonitorTypeState ID="OverThreshold" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>System!System.ExpressionEvaluatorSchema</SchemaType>
+          </IncludeSchemaTypes>
+          <xsd:element name="TargetSystem" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Uri" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Filter" type="xsd:string" minOccurs="0" maxOccurs="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SplitItems" type="xsd:boolean" minOccurs="0" maxOccurs="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="Interval" type="xsd:unsignedInt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" minOccurs="0" maxOccurs="1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="InstanceName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="PctThreshold" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="MBThreshold" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="Interval" Selector="$Config/Interval$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="PctThreshold" Selector="$Config/PctThreshold$" ParameterType="double" />
+          <OverrideableParameter ID="MBThreshold" Selector="$Config/MBThreshold$" ParameterType="double" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="Unix!Microsoft.Unix.WSMan.TimedEnumerator.Filtered">
+              <TargetSystem>$Config/TargetSystem$</TargetSystem>
+              <Uri>$Config/Uri$</Uri>
+              <Filter>$Config/Filter$</Filter>
+              <SplitItems>$Config/SplitItems$</SplitItems>
+              <Interval>$Config/Interval$</Interval>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <InstanceName>$Config/InstanceName$</InstanceName>
+              <InstanceProperty>/DataItem/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='Name']</InstanceProperty>
+            </DataSource>
+            <ConditionDetection ID="CDUnderThreshold" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">/DataItem/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='PercentFreeSpace']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/PctThreshold$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">/DataItem/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='FreeMegabytes']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Less</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/MBThreshold$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="CDOverThreshold" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <Or>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">/DataItem/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='PercentFreeSpace']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>GreaterEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/PctThreshold$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Double">/DataItem/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='FreeMegabytes']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>GreaterEqual</Operator>
+                      <ValueExpression>
+                        <Value Type="Double">$Config/MBThreshold$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </Or>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="UnderThreshold">
+              <Node ID="CDUnderThreshold">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="OverThreshold">
+              <Node ID="CDOverThreshold">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+  </MonitorTypes>
+</TypeDefinitions>
+  <Monitoring>
+    <Monitors>
+      <UnitMonitor ID="Example.2x2.LogicalDisk.FreeSpace.Warning.Monitor" Accessibility="Public" Enabled="false" Target="Unix!Microsoft.Unix.LogicalDisk" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Microsoft.Unix.WSMan.LogicalDisk.FreeSpace.TwoState.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="Example.2x2.LogicalDisk.FreeSpace.Warning.AlertMessage">
+          <AlertOnState>Warning</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Data/Context/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='PercentFreeSpace']$</AlertParameter1>
+            <AlertParameter2>$Data/Context/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='FreeMegabytes']$</AlertParameter2>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="UnderThreshold" MonitorTypeStateID="UnderThreshold" HealthState="Warning" />
+          <OperationalState ID="OverThreshold" MonitorTypeStateID="OverThreshold" HealthState="Success" />
+        </OperationalStates>
+        <Configuration>
+          <TargetSystem>$Target/Host/Property[Type="Unix!Microsoft.Unix.Computer"]/NetworkName$</TargetSystem>
+          <Uri>http://schemas.microsoft.com/wbem/wscim/1/cim-schema/2/SCX_FileSystemStatisticalInformation?__cimnamespace=root/scx</Uri>
+          <Filter />
+          <SplitItems>true</SplitItems>
+          <Interval>300</Interval>
+          <InstanceName>$Target/Property[Type="Unix!Microsoft.Unix.LogicalDevice"]/DeviceID$</InstanceName>
+          <PctThreshold>15</PctThreshold>
+          <MBThreshold>2000</MBThreshold>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Example.2x2.LogicalDisk.FreeSpace.Critical.Monitor" Accessibility="Public" Enabled="false" Target="Unix!Microsoft.Unix.LogicalDisk" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Microsoft.Unix.WSMan.LogicalDisk.FreeSpace.TwoState.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="Example.2x2.LogicalDisk.FreeSpace.Critical.AlertMessage">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Data/Context/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='PercentFreeSpace']$</AlertParameter1>
+            <AlertParameter2>$Data/Context/WsManData/*[local-name(.)='SCX_FileSystemStatisticalInformation']/*[local-name(.)='FreeMegabytes']$</AlertParameter2>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="UnderThreshold" MonitorTypeStateID="UnderThreshold" HealthState="Error" />
+          <OperationalState ID="OverThreshold" MonitorTypeStateID="OverThreshold" HealthState="Success" />
+        </OperationalStates>
+        <Configuration>
+          <TargetSystem>$Target/Host/Property[Type="Unix!Microsoft.Unix.Computer"]/NetworkName$</TargetSystem>
+          <Uri>http://schemas.microsoft.com/wbem/wscim/1/cim-schema/2/SCX_FileSystemStatisticalInformation?__cimnamespace=root/scx</Uri>
+          <Filter />
+          <SplitItems>true</SplitItems>
+          <Interval>300</Interval>
+          <InstanceName>$Target/Property[Type="Unix!Microsoft.Unix.LogicalDevice"]/DeviceID$</InstanceName>
+          <PctThreshold>10</PctThreshold>
+          <MBThreshold>1000</MBThreshold>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+  </Monitoring>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="Example.2x2.LogicalDisk.FreeSpace.Warning.AlertMessage" />
+      <StringResource ID="Example.2x2.LogicalDisk.FreeSpace.Critical.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Warning.Monitor">
+          <Name>Logical Disk Free Space Warning</Name>
+          <Description>Logical Disk Free Space Monitor</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Warning.Monitor" SubElementID="UnderThreshold">
+          <Name>Logical Disk Free Space is under Threshold</Name>
+          <Description>Logical Disk Free Space Monitor is under Error Threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Warning.Monitor" SubElementID="OverThreshold">
+          <Name>Logical Disk Free Space is over Threshold</Name>
+          <Description>Logical Disk Free Space Monitor is over Threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Warning.AlertMessage">
+          <Name>Warning - Logical Disk Free Space is too low</Name>
+          <Description>The thresholds for the Logical Disk Free Space monitor have been exceeded. The values that exceeded the threshold are: {0}% and {1}MB Free Space.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Critical.Monitor">
+          <Name>Logical Disk Free Space Critical</Name>
+          <Description>Logical Disk Free Space Monitor</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Critical.Monitor" SubElementID="UnderThreshold">
+          <Name>Logical Disk Free Space is under Threshold</Name>
+          <Description>Logical Disk Free Space Monitor is under Error Threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Critical.Monitor" SubElementID="OverThreshold">
+          <Name>Logical Disk Free Space is over Threshold</Name>
+          <Description>Logical Disk Free Space Monitor is over Threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="Example.2x2.LogicalDisk.FreeSpace.Critical.AlertMessage">
+          <Name>CRITICAL - Logical Disk Free Space is too low</Name>
+          <Description>The thresholds for the Logical Disk Free Space monitor have been exceeded. The values that exceeded the threshold are: {0}% and {1}MB Free Space.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
 </ManagementPackFragment>

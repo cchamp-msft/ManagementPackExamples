@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{7380bc97-b15e-4b53-ab42-4319163e7437}</ProjectGuid>
     <RootNamespace>Example.2x2.FS.Space.Monitoring</RootNamespace>
-    <Name>Example.2x2.FS.Space.Monitoring</Name>
+    <Name>Example 2x2 Filesystem Space Monitoring</Name>
     <ManagementPackName>Example.2x2.FS.Space.Monitoring</ManagementPackName>
     <Version>1.0.0.0</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
@@ -52,7 +52,7 @@
     </ManagementPackReference>
     <ManagementPackReference Include="System.Health.Library">
       <Alias>Health</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="System.Library">
       <Alias>System</Alias>
