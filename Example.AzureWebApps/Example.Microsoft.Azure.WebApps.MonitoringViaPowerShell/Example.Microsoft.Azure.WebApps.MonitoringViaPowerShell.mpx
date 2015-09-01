@@ -2876,7 +2876,7 @@ if ($error.Count -gt 0) {
       <DisplayStrings>
         <DisplayString ElementID="Example.Microsoft.Azure.WebApps.MonitoringViaPowerShell">
           <Name>Example - Microsoft Azure Web App Monitoring via PowerShell</Name>
-          <Description>This management pack requires the Windows Azure Management Pack to be installed and configured with a subscription, and Azure PowerShell to be installed on any Management Server that is member of the pool monitoring the subscription. For proxy support, implement for PowerShell, see: http://dunnry.com/blog/2010/01/25/SupportingBasicAuthProxies.aspx</Description>
+          <Description>This management pack requires the Windows Azure Management Pack to be installed and configured with a subscription, and Azure PowerShell to be installed on any Management Server that is member of the pool monitoring the subscription.</Description>
         </DisplayString>
         <DisplayString ElementID="Azure.WebApp">
           <Name>Azure Web App</Name>
